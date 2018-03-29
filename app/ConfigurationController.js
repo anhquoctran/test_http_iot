@@ -7,10 +7,9 @@ const db = low(adapter)
 function ConfigurationController() {
     
     this.reset = function() {
-        return new Promise((resolve, reject) => {
-            db.defaults({}).write()
-            resolve(true)
-        })
+        db.defaults({}).write()
+        resolve(true)
+
     }
 
     this.setConfig = function(data) {
@@ -21,7 +20,9 @@ function ConfigurationController() {
             .set('password', data.password)
             .set('parameter1', data.parameter1)
             .set('parameter2', data.parameter2)
-            .write(resolve)
+            .write()
+
+            
         })
     }
 }

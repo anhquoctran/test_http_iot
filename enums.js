@@ -1,4 +1,4 @@
-import { Enum } from "enumify";
+var Enum = require("enumify");
 
 class InstanceType extends Enum { }
 

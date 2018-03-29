@@ -2,7 +2,7 @@ var express = require('express')
 var moment = require('moment')
 const { check, validationResult } = require('express-validator/check');
 
-var ConfigurationController = require('./ConfigurationController')
+var controller = require('./ConfigurationController')
 /**
  * Define RESTful API main router
  * 
@@ -24,11 +24,16 @@ module.exports = function(app, router) {
 
     //configure route
     router.get('/configure', [
-        
+        check('name').exists().withMessage("cannot be blank")
     ], (req,res) => {
-        return res.json({
-            message: "this is configure call",
-            time: moment()
+        controller.setConfig({
+
+        }).then(result => {
+            return res.json({
+                message: "this is configure call",
+                time: moment()
+            })
         })
+        
     })
 }

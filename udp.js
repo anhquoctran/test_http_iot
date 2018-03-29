@@ -4,6 +4,7 @@ var ip = require('ip')
 const PORT = 8088
 var HOST = ip.address()
 
+var enums = require('./enums')
 var data = JSON.stringify({
     name: "DEVICE EXAMPLE",
     last_status: true,
