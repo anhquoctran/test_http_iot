@@ -10,30 +10,44 @@ var controller = require('./ConfigurationController')
  * @param {any} router 
  */
 module.exports = function(app, router) {
-
-    
     app.use('/', router)
 
     //index route
     router.route('/').get((req,res) => {
         return res.json({
-            message: "this is home call",
+            message: "welcome",
             time: moment()
         })
     })
 
     //configure route
     router.get('/configure', [
-        check('name').exists().withMessage("cannot be blank")
+        check('name').exists().trim().withMessage("cannot be blank")
     ], (req,res) => {
-        controller.setConfig({
+        var body = req.body
 
-        }).then(result => {
-            return res.json({
-                message: "this is configure call",
-                time: moment()
-            })
+        controller.setConfig({
+            name = body.name,
+            ssid = body.ssid,
+            admin_password = body.admin_password,
+            password = body.password,
+            parameter1 = body.parameter1,
+            parameter2 = body.parameter2,
+            last_status = body.last_status
+        }, (res) => {
+
         })
         
+    })
+
+    router.get('/add_user', [
+        check("name").exists().trim()
+    ], (req, res) => {
+        controller.addUser(req.body.user, (err, result) => {
+            if(err) console.error(err)
+            else {
+                console.log("Added user!")
+            }
+        })
     })
 }

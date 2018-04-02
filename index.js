@@ -8,4 +8,3 @@ app.listen(PORT, function() {
 })
 
 require('./configuration')(app)
-require('./udp')
