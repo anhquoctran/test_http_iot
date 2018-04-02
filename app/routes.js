@@ -27,13 +27,13 @@ module.exports = function(app, router) {
         var body = req.body
 
         controller.setConfig({
-            name = body.name,
-            ssid = body.ssid,
-            admin_password = body.admin_password,
-            password = body.password,
-            parameter1 = body.parameter1,
-            parameter2 = body.parameter2,
-            last_status = body.last_status
+            name : body.name,
+            ssid : body.ssid,
+            admin_password : body.admin_password,
+            password : body.password,
+            parameter1 : body.parameter1,
+            parameter2 : body.parameter2,
+            last_status : body.last_status
         }, (res) => {
 
         })
