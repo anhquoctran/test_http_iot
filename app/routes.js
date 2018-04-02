@@ -12,6 +12,10 @@ var controller = require('./ConfigurationController')
 module.exports = function(app, router) {
     app.use('/', router)
 
+    router.get('/favicon.ico', function(req, res) {
+        res.status(204);
+    });
+    
     //index route
     router.route('/').get((req,res) => {
         return res.json({
