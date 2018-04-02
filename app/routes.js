@@ -41,7 +41,7 @@ module.exports = function (app, router) {
                 success: false
             })
         }
-        var body = req.body
+        var body = req.query
         console.log("Received new config >> " )
         console.log(JSON.stringify(body))
         controller.setConfig({

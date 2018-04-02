@@ -1,4 +1,4 @@
-{
+module.exports = {
     "name": "Example device",
     "ssid": "example ssid",
     "admin_password": "example",
