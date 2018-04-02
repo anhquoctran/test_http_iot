@@ -1,6 +1,7 @@
 var loki = require('lokijs')
 var path = require('path')
 var device = require('../device')
+var fs = require('fs')
 var db = new loki(path.join(__dirname, "..", "users.json"))
 db.autosave = true
 var users = db.addCollection("users")
@@ -24,23 +25,31 @@ function ConfigurationController() {
     this.setConfig = function (data, cb) {
 
         if (data) {
-            setConfigInternal(data)
+            setConfigInternal(data, cb)
             console.log(JSON.stringify(device))
-            return cb(true)
         } else {
-            return cb(false)
+            cb("Data cannot be blank", false)
         }
 
     }
 
-    function setConfigInternal(data) {
+    function setConfigInternal(data, cb) {
         device.name = data.name
         device.ssid = data.ssid
         device.admin_password = data.admin_password
         device.password = data.password
         device.parameter1 = data.parameter1
         device.paramater2 = data.paramater2
-        device.last_status = data.last_status
+		device.last_status = data.last_status
+		
+		var deviceData = JSON.stringify(device)
+		fs.writeFile('../device.json', deviceData, function(err) {
+			if(err) cb(err, false)
+			else {
+				cb(null, true)
+			}
+		});
+
     }
 
     this.addUser = function (user, cb) {
