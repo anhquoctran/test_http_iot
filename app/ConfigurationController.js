@@ -22,7 +22,7 @@ function ConfigurationController() {
     }
 
     this.setConfig = function(data,cb) {
-        if(!data) {
+        if(data) {
             device.name = data.name
             device.ssid = data.ssid
             device.admin_password = data.admin_password
