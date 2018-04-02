@@ -22,8 +22,7 @@ function ConfigurationController() {
     }
 
     this.setConfig = function (data, cb) {
-        console.log(JSON.stringify(data))
-        
+
         if (data) {
             device.name = data.name
             device.ssid = data.ssid
