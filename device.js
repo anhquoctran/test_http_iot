@@ -5,5 +5,6 @@ module.exports = {
     password: "example",
     parameter1: "params1",
     paramater2: "params2",
-    last_status: false
+    last_status: false,
+    ip: ""
 }

@@ -3,6 +3,7 @@ var ip = require('ip')
 
 const PORT = 8088
 var HOST = ip.address()
+var device = require('./device')
 
 var dataRecv = JSON.stringify({
     sign: '{#}',
@@ -27,12 +28,8 @@ socket.on('message', function(msg, client) {
 
     if(msg.toString() === '{#}') {
         console.log("Receive get_device_config request...")
-        var data = JSON.stringify({
-            name: "DEVICE EXAMPLE",
-            last_status: true,
-            ip: HOST,
-            auth: true
-        })
+        device.ip = ip.address()
+        var data = JSON.stringify(device)
         var message = new Buffer(data)
 
         socket.send(message, 0, message.length, PORT, client.address, function(err) {
