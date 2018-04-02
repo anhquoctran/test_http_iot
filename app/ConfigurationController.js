@@ -24,14 +24,8 @@ function ConfigurationController() {
     this.setConfig = function (data, cb) {
 
         if (data) {
-            device.name = data.name
-            device.ssid = data.ssid
-            device.admin_password = data.admin_password
-            device.password = data.password
-            device.parameter1 = data.parameter1
-            device.paramater2 = data.paramater2
-            device.last_status = data.last_status
-            console.log(JSON.stringify(device));
+            setConfigInternal(data)
+            console.log(JSON.stringify(device))
             return cb(true)
         } else {
             return cb(false)
