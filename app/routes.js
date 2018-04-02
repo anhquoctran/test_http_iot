@@ -52,7 +52,7 @@ module.exports = function (app, router) {
             parameter1: body.param1,
             parameter2: body.param2,
             last_status: body.last_status
-        }, (result) => {
+        }, (err, result) => {
             if (result == true) {
                 return res.json({
                     message: "CONFIG_OK",
@@ -61,7 +61,7 @@ module.exports = function (app, router) {
                 })
             } else {
                 return res.status(500).send({
-                    message: "CONFIG_FAILED",
+                    message: "SAVE_CONFIG_FAILED",
                     status: 500,
                     success: false
                 })

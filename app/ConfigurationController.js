@@ -25,10 +25,16 @@ function ConfigurationController() {
     this.setConfig = function (data, cb) {
 
         if (data) {
-            setConfigInternal(data, cb)
-            console.log(JSON.stringify(device))
+            setConfigInternal(data, function(err, res) {
+				if(err) cb(err, false)
+				else {
+					console.log(JSON.stringify(device))
+					cb(null, true)
+				}
+			})
+            
         } else {
-            cb("Data cannot be blank", false)
+            return cb("Data cannot be blank", false)
         }
 
     }
