@@ -30,6 +30,7 @@ function ConfigurationController() {
             device.parameter1 = data.parameter1
             device.paramater2 = data.paramater2
             device.last_status = data.last_status
+            console.log(JSON.stringify(device));
             return cb(true)
         } else {
             return cb(false)
