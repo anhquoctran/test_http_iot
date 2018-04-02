@@ -15,7 +15,7 @@ module.exports = function(app, router) {
     router.get('/favicon.ico', function(req, res) {
         res.status(204);
     });
-    
+
     //index route
     router.route('/').get((req,res) => {
         return res.json({
@@ -35,11 +35,23 @@ module.exports = function(app, router) {
             ssid : body.ssid,
             admin_password : body.admin_password,
             password : body.password,
-            parameter1 : body.parameter1,
-            parameter2 : body.parameter2,
+            parameter1 : body.param1,
+            parameter2 : body.param2,
             last_status : body.last_status
-        }, (res) => {
-
+        }, (result) => {
+            if(result == true) {
+                return res.json({
+                    message: "CONFIG_OK",
+                    status: 200,
+                    success: true
+                })
+            } else {
+                return res.status(500).send({
+                    message: "CONFIG_FAILED",
+                    status: 500,
+                    success: false
+                })
+            }
         })
         
     })
