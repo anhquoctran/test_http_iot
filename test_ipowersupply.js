@@ -4,14 +4,6 @@ var ip = require('ip')
 const PORT = 8088
 var HOST = ip.address()
 
-var enums = require('./enums')
-var data = JSON.stringify({
-    name: "DEVICE EXAMPLE",
-    last_status: true,
-    ip: HOST,
-    auth: true
-})
-
 var dataRecv = JSON.stringify({
     sign: '{#}',
     ip: '127.0.0.1',
@@ -34,7 +26,13 @@ socket.on('message', function(msg, client) {
     console.log("Received message from " + client.address + ":" + client.port + " at " + new Date().toLocaleString('vn'))
 
     if(msg.toString() === '{#}') {
-
+        console.log("Receive get_device_config request...")
+        var data = JSON.stringify({
+            name: "DEVICE EXAMPLE",
+            last_status: true,
+            ip: HOST,
+            auth: true
+        })
         var message = new Buffer(data)
 
         socket.send(message, 0, message.length, PORT, client.address, function(err) {
@@ -52,6 +50,10 @@ socket.on('message', function(msg, client) {
             }
         })
     } else {
-        console.log(msg.toString())
+        console.log("message from: " + msg.toString())
+        var data = "This is for you: " + msg.toString()
+        socket.send(new Buffer(data), 0, data.length, PORT, client.address, function(err) {
+            console.log("Echo success")
+        })
     }
 })
