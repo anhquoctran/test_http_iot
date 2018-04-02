@@ -42,7 +42,8 @@ module.exports = function (app, router) {
             })
         }
         var body = req.body
-
+        console.log("Received new config >> " )
+        console.log(JSON.stringify(body))
         controller.setConfig({
             name: body.name,
             ssid: body.ssid,

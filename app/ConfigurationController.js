@@ -6,8 +6,8 @@ db.autosave = true
 var users = db.addCollection("users")
 
 function ConfigurationController() {
-    
-    this.reset = function() {
+
+    this.reset = function () {
         resetInternal()
     }
 
@@ -21,8 +21,10 @@ function ConfigurationController() {
         device.last_status = true
     }
 
-    this.setConfig = function(data,cb) {
-        if(data) {
+    this.setConfig = function (data, cb) {
+        console.log(JSON.stringify(data))
+        
+        if (data) {
             device.name = data.name
             device.ssid = data.ssid
             device.admin_password = data.admin_password
@@ -35,22 +37,32 @@ function ConfigurationController() {
         } else {
             return cb(false)
         }
-            
+
+    }
+
+    function setConfigInternal(data) {
+        device.name = data.name
+        device.ssid = data.ssid
+        device.admin_password = data.admin_password
+        device.password = data.password
+        device.parameter1 = data.parameter1
+        device.paramater2 = data.paramater2
+        device.last_status = data.last_status
     }
 
     this.addUser = function (user, cb) {
         var user = {
-            id : user.id,
-            username : user.username,
-            password : user.password
+            id: user.id,
+            username: user.username,
+            password: user.password
         }
         var count = users.count({})
         console.log(count.toString())
-        if(count < 10) {
+        if (count < 10) {
             users.insert(user)
 
-            db.save(function(err) {
-                if(err) {
+            db.save(function (err) {
+                if (err) {
                     return cb(err, null)
                 } else {
                     return res.json(null, {
@@ -63,7 +75,7 @@ function ConfigurationController() {
         } else {
             return cb("Maximum number of users allowed", null)
         }
-        
+
     }
 }
 
