@@ -39,9 +39,9 @@ function ConfigurationController() {
 
     this.addUser = function (user, cb) {
         var user = {
-            id = user.id,
-            username = user.username,
-            password = user.password
+            id : user.id,
+            username : user.username,
+            password : user.password
         }
         var count = users.count({})
         console.log(count.toString())
