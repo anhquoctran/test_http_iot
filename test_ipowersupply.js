@@ -47,7 +47,8 @@ socket.on('message', function(msg, client) {
             }
         })
     } else {
-        console.log("message " + msg.toString())
+        console.log("Message: " + msg.toString())
+        console.log("HEX message: " + msg.toString("hex"))
         var data = msg.toString()
         socket.send(new Buffer(data), 0, data.length, PORT, client.address, function(err) {
             console.log("Data not valid format. Send echo fallback at" + new Date().toLocaleString('vi'))
