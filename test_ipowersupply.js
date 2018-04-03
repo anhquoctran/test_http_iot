@@ -24,7 +24,7 @@ socket.on('listening', function() {
 })
 
 socket.on('message', function(msg, client) {
-    console.log("Received message from " + client.address + ":" + client.port + " at " + new Date().toLocaleString('vn'))
+    console.log("Received message from " + client.address + ":" + client.port + " at " + new Date().toLocaleString('vi'))
 
     if(msg.toString() === '{#}') {
         console.log("Receive get_device_config request...")
