@@ -46,6 +46,8 @@ socket.on('message', function(msg, client) {
                 console.log('Message has been sent to ' + client.address + ":" + PORT)
             }
         })
+    } else if(msg.toString() === "clear" || msg.toString() === "cls" || msg.toString() === "reset") {
+        console.reset()
     } else {
         console.log("Message: " + msg.toString())
         console.log("HEX message: " + displayHex(msg))
@@ -73,4 +75,8 @@ function displayHex(buffer) {
 
 String.prototype.replaceAt=function(index, replacement) {
     return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+}
+
+console.reset = function() {
+    return process.stdout.write('\033c');
 }
