@@ -58,5 +58,6 @@ socket.on('message', function(msg, client) {
 
 function displayHex(buffer) {
     var strBuff = buffer.toString('hex').toUpperCase()
+    strBuff.replace(/(\d{2})/g, '$1 ').replace(/(^\s+|\s+$)/,'')
     return strBuff
 }
