@@ -58,6 +58,19 @@ socket.on('message', function(msg, client) {
 
 function displayHex(buffer) {
     var strBuff = buffer.toString('hex').toUpperCase()
-    strBuff.replace(/(\d{2})/g, '$1 ').replace(/(^\s+|\s+$)/,'')
-    return strBuff
+    var tmp1 = ""
+    var arr = Array.from(strBuff)
+    for(var i = 0; i < arr.length; i++) {
+        try {
+            tmp1 += arr[0+i+i].toString() + arr[1+i+i].toString() + " ";
+        } catch {
+            tmp1 = tmp1.replaceAt(tmp1.length - 1, '');
+            break;
+        }
+    }
+    return tmp1.trim()
+}
+
+String.prototype.replaceAt=function(index, replacement) {
+    return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
 }
