@@ -47,10 +47,10 @@ socket.on('message', function(msg, client) {
             }
         })
     } else {
-        console.log("message from: " + msg.toString())
+        console.log("message " + msg.toString())
         var data = msg.toString()
         socket.send(new Buffer(data), 0, data.length, PORT, client.address, function(err) {
-            console.log("Data not valid format. Send echo fallback")
+            console.log("Data not valid format. Send echo fallback" + new Date().toLocaleString('vi'))
         })
     }
 })
