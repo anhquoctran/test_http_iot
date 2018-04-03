@@ -63,7 +63,7 @@ function displayHex(buffer) {
     for(var i = 0; i < arr.length; i++) {
         try {
             tmp1 += arr[0+i+i].toString() + arr[1+i+i].toString() + " ";
-        } catch {
+        } catch (err) {
             tmp1 = tmp1.replaceAt(tmp1.length - 1, '');
             break;
         }
