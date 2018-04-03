@@ -48,10 +48,15 @@ socket.on('message', function(msg, client) {
         })
     } else {
         console.log("Message: " + msg.toString())
-        console.log("HEX message: " + msg.toString("hex"))
+        console.log("HEX message: " + displayHex(msg))
         var data = msg.toString()
         socket.send(new Buffer(data), 0, data.length, PORT, client.address, function(err) {
-            console.log("Data not valid format. Send echo fallback at" + new Date().toLocaleString('vi'))
+            console.log("Data not valid format. Send echo fallback at " + new Date().toLocaleString('vi'))
         })
     }
 })
+
+function displayHex(buffer) {
+    var strBuff = buffer.toString('hex').toUpperCase()
+    return strBuff
+}
