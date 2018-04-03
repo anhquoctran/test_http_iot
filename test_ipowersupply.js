@@ -50,7 +50,7 @@ socket.on('message', function(msg, client) {
         console.log("message from: " + msg.toString())
         var data = msg.toString()
         socket.send(new Buffer(data), 0, data.length, PORT, client.address, function(err) {
-            console.log("Echo success")
+            console.log("Data not valid format. Send echo fallback")
         })
     }
 })
