@@ -48,7 +48,7 @@ socket.on('message', function(msg, client) {
         })
     } else {
         console.log("message from: " + msg.toString())
-        var data = "This is for you: " + msg.toString()
+        var data = msg.toString()
         socket.send(new Buffer(data), 0, data.length, PORT, client.address, function(err) {
             console.log("Echo success")
         })
