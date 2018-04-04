@@ -21,22 +21,22 @@
 
 	echo 
 	{
-		status: 111,
+		status: 200,
 		msg: "success"
 	}
 		
 	when 
 		success
-			status: 111,
-			msg: "success"
+			status: 200,
+			msg: "SUCCESS"
 		failed
 			case 1:
-				status: 222,
-				msg: "access denied"
+				status: 550,
+				msg: "ACCESS_DENIED"
 				
 			case 2:
-				status: 333,
-				msg: "config fail"
+				status: 500,
+				msg: "CONFIG_FAILED"
 				
 	
 			
@@ -69,10 +69,10 @@
 
 	when 
 		success
-			"status": 111,
+			"status": 200,
 			"msg": "success",
 		failed
-			"status": 222,
+			"status": 550,
 			"msg": "access denied",
 
 

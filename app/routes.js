@@ -28,7 +28,7 @@ module.exports = function (app, router) {
     })
 
     //configure route
-    router.get('/configure', [
+    router.post('/configure', [
         check('name').exists().trim().withMessage("cannot be blank"),
         check('ssid').exists().trim().withMessage("cannot be blank")
     ], (req, res) => {
@@ -41,7 +41,7 @@ module.exports = function (app, router) {
                 success: false
             })
         }
-        var body = req.query
+        var body = req.body
         console.log("Received new config >> " )
         console.log(JSON.stringify(body))
         controller.setConfig({
@@ -55,15 +55,14 @@ module.exports = function (app, router) {
         }, (err, result) => {
             if (result == true) {
                 return res.json({
-                    message: "CONFIG_OK",
                     status: 200,
-                    success: true
+			        msg: "SUCCESS"
                 })
             } else {
                 return res.status(500).send({
-                    message: "SAVE_CONFIG_FAILED",
                     status: 500,
-                    success: false
+                    message: "CONFIG_FAILED",
+                    
                 })
             }
         })

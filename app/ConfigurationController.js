@@ -60,6 +60,7 @@ function ConfigurationController() {
         var count = users.count({})
         console.log(count.toString())
         if (count < 10) {
+            
             users.insert(user)
 
             db.save(function (err) {
