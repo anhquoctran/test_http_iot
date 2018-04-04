@@ -36,7 +36,7 @@ socket.on('message', function(msg, client) {
             "status": 200,
             "device_name": "example device",
             "device_ip": "192.168.1.5",
-            "last_status": false
+            "last_status": true
         })
         var message = new Buffer(data)
 
