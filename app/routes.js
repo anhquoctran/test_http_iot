@@ -12,7 +12,7 @@ var controller = require('./ConfigurationController')
  * @param {any} app 
  * @param {any} router 
  */
-module.exports = function (app, router) {
+module.exports = function (app) {
 
     app.get('/favicon.ico', function (req, res) {
         res.status(204);
@@ -28,7 +28,7 @@ module.exports = function (app, router) {
 
     //configure route
     app.post('/configure', [
-        check('name').exists().trim().withMessage("cannot be blank"),
+        check('device_name').exists().trim().withMessage("cannot be blank"),
         check('ssid').exists().trim().withMessage("cannot be blank")
     ], (req, res) => {
         var errors = validationResult(req)
@@ -46,7 +46,7 @@ module.exports = function (app, router) {
         console.log("Received new config >> " )
         console.log(JSON.stringify(body))
         controller.setConfig({
-            name: body.name,
+            name: body.device_name,
             ssid: body.ssid,
             admin_password: body.admin_password,
             password: body.passwd,

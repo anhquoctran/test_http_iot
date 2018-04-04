@@ -15,5 +15,5 @@ module.exports = function(app) {
     
     var router = express.Router()
     
-    require('./app/routes')(app, router)
+    require('./app/routes')(app)
 }
