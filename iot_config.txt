@@ -1,0 +1,86 @@
+//config device
+	+ source: mobile, desktop
+	+ destination: 192.168.4.1
+	+ proto: http 
+	+ port: 16000
+
+
+	push
+	{
+		"ssid": "NALT",
+		"passwd" "@NALT@nalt",
+		"passwd_admin": "admin123",
+		"param1": false,
+		"param2": false,
+		"users": [
+			{"username": "user1", "password": "123456"},
+			{"username": "user2", "password": "123456"},
+			{"username": "user3", "password": "123456"}
+		]
+	}
+
+	echo 
+	{
+		status: 111,
+		msg: "success"
+	}
+		
+	when 
+		success
+			status: 111,
+			msg: "success"
+		failed
+			case 1:
+				status: 222,
+				msg: "access denied"
+				
+			case 2:
+				status: 333,
+				msg: "config fail"
+				
+	
+			
+
+	APP -------------------> DEVICE(update config) ------------------> APP
+			push config					              echo result
+	note: 
+		- ssid: wifi ssid
+		- passwd: wifi password
+		- passwd_admin: admin password
+		- param1: start device
+		- param2: reset device
+
+//scan device
+	+ source: mobile, desktop
+	+ destination: any
+	+ proto: udp
+	+ port: 15000
+	
+	broadcast 
+	{"##", ip}
+
+	echo 
+	{
+		"status": 111,
+		"device_name": "device",
+		"device_ip": "192.168.1.5",
+		"last_status": false
+	}
+
+	when 
+		success
+			"status": 111,
+			"msg": "success",
+		failed
+			"status": 222,
+			"msg": "access denied",
+
+
+	APP -------------------> ANY DEVICE ------------------> APP
+			broadcast					   echo result
+
+	note:
+
+		- last_status: status of device(on/off - true/false)
+		- device_name: name of device
+		- device_ip: ip of device
