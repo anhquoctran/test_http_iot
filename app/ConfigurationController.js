@@ -25,14 +25,21 @@ function ConfigurationController() {
     this.setConfig = function (data, cb) {
 
         if (data) {
-            setConfigInternal(data, function(err, res) {
-				if(err) cb(err, false)
-				else {
-					console.log(JSON.stringify(device))
-					cb(null, true)
-				}
-			})
-            
+            device.name = data.name
+            device.ssid = data.ssid
+            device.admin_password = data.admin_password
+            device.password = data.password
+            device.parameter1 = data.parameter1
+            device.paramater2 = data.paramater2
+            device.last_status = data.last_status
+
+            var deviceData = JSON.stringify(device)
+            fs.writeFile('../device.json', deviceData, function (err) {
+                if (err) cb(err, false)
+                else {
+                    cb(null, true)
+                }
+            });
         } else {
             return cb("Data cannot be blank", false)
         }
@@ -40,21 +47,7 @@ function ConfigurationController() {
     }
 
     function setConfigInternal(data, cb) {
-        device.name = data.name
-        device.ssid = data.ssid
-        device.admin_password = data.admin_password
-        device.password = data.password
-        device.parameter1 = data.parameter1
-        device.paramater2 = data.paramater2
-		device.last_status = data.last_status
-		
-		var deviceData = JSON.stringify(device)
-		fs.writeFile('../device.json', deviceData, function(err) {
-			if(err) cb(err, false)
-			else {
-				cb(null, true)
-			}
-		});
+
 
     }
 
