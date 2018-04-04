@@ -13,14 +13,13 @@ var controller = require('./ConfigurationController')
  * @param {any} router 
  */
 module.exports = function (app, router) {
-    app.use('/', router)
 
-    router.get('/favicon.ico', function (req, res) {
+    app.get('/favicon.ico', function (req, res) {
         res.status(204);
     });
 
     //index route
-    router.route('/').get((req, res) => {
+    app.get('/', (req, res) => {
         return res.json({
             message: "welcome",
             time: moment()
@@ -28,11 +27,12 @@ module.exports = function (app, router) {
     })
 
     //configure route
-    router.post('/configure', [
+    app.post('/configure', [
         check('name').exists().trim().withMessage("cannot be blank"),
         check('ssid').exists().trim().withMessage("cannot be blank")
     ], (req, res) => {
         var errors = validationResult(req)
+
         if (!errors.isEmpty()) {
             console.error("Error data validation")
             return res.status(400).send({
@@ -41,6 +41,7 @@ module.exports = function (app, router) {
                 success: false
             })
         }
+        
         var body = req.body
         console.log("Received new config >> " )
         console.log(JSON.stringify(body))
@@ -48,10 +49,9 @@ module.exports = function (app, router) {
             name: body.name,
             ssid: body.ssid,
             admin_password: body.admin_password,
-            password: body.password,
+            password: body.passwd,
             parameter1: body.param1,
-            parameter2: body.param2,
-            last_status: body.last_status
+            parameter2: body.param2
         }, (err, result) => {
             if (result == true) {
                 return res.json({
@@ -69,7 +69,7 @@ module.exports = function (app, router) {
 
     })
 
-    router.get('/add_user', [
+    app.get('/add_user', [
         check("name").exists().trim()
     ], (req, res) => {
         controller.addUser(req.body.user, (err, result) => {

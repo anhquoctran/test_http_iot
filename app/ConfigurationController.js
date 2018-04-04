@@ -31,7 +31,6 @@ function ConfigurationController() {
             device.password = data.password
             device.parameter1 = data.parameter1
             device.paramater2 = data.paramater2
-            device.last_status = data.last_status
 
             var deviceData = JSON.stringify(device)
             fs.writeFile('../device.json', deviceData, function (err) {
@@ -43,11 +42,6 @@ function ConfigurationController() {
         } else {
             return cb("Data cannot be blank", false)
         }
-
-    }
-
-    function setConfigInternal(data, cb) {
-
 
     }
 
