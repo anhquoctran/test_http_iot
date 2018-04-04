@@ -34,7 +34,7 @@ socket.on('message', function(msg, client) {
 
         var data = JSON.stringify({
             "status": 200,
-            "device_name": "device",
+            "device_name": "example device",
             "device_ip": "192.168.1.5",
             "last_status": false
         })
