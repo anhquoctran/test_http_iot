@@ -26,10 +26,18 @@ socket.on('listening', function() {
 socket.on('message', function(msg, client) {
     console.log("Received message from " + client.address + ":" + client.port + " at " + new Date().toLocaleString('vi'))
 
-    if(msg.toString() === '{#}') {
+    if(msg.toString()[1] === '#') {
+
         console.log("Receive get_device_config request...")
+
         device.ip = ip.address()
-        var data = JSON.stringify(device)
+
+        var data = JSON.stringify({
+            "status": 200,
+            "device_name": "device",
+            "device_ip": "192.168.1.5",
+            "last_status": false
+        })
         var message = new Buffer(data)
 
         socket.send(message, 0, message.length, PORT, client.address, function(err) {
